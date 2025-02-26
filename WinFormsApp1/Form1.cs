@@ -80,5 +80,22 @@ namespace WinFormsApp1
                 form2.ShowDialog();
             }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Create an instance of the livecam_feed form
+            livecam_feed livecamForm = new livecam_feed();
+
+            // Open the form (use ShowDialog() for a modal dialog or Show() for non-modal)
+            livecamForm.Show();  // Non-modal, allows interaction with both forms
+                                 // livecamForm.ShowDialog();  // Modal, blocks interaction with Form1 until livecam_feed is closed
+            
+        }
+
     }
 }
