@@ -4,6 +4,7 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        private List<Image> selectedImages = new List<Image>();
         public Form1()
         {
             InitializeComponent();
@@ -68,33 +69,46 @@ namespace WinFormsApp1
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                List<Image> selectedImages = new List<Image>();
+                flowLayoutPanel1.Controls.Clear(); // Clear previous images
+                selectedImages.Clear(); // Clear previously selected images
 
                 foreach (string file in openFileDialog.FileNames)
                 {
-                    selectedImages.Add(new Bitmap(file));
-                }
+                    Image img = new Bitmap(file);
+                    selectedImages.Add(img); // Store the image
 
-                // Open Form2 and pass the selected images to it
-                Form2 form2 = new Form2(selectedImages);
-                form2.ShowDialog();
+                    PictureBox pictureBox = new PictureBox
+                    {
+                        Image = img,
+                        SizeMode = PictureBoxSizeMode.Zoom,
+                        Width = 100,
+                        Height = 100,
+                        Margin = new Padding(5)
+                    };
+
+                    flowLayoutPanel1.Controls.Add(pictureBox);
+                }
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            if (selectedImages.Count > 0)
+            {
+                Form2 form2 = new Form2(selectedImages);
+                form2.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please upload images first before confirming.", "No Images Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Create an instance of the livecam_feed form
             livecam_feed livecamForm = new livecam_feed();
+            livecamForm.Show(); 
 
-            // Open the form (use ShowDialog() for a modal dialog or Show() for non-modal)
-            livecamForm.Show();  // Non-modal, allows interaction with both forms
-                                 // livecamForm.ShowDialog();  // Modal, blocks interaction with Form1 until livecam_feed is closed
-            
         }
 
     }

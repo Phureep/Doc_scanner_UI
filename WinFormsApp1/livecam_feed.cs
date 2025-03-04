@@ -61,15 +61,35 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (image != null)
+            if (capture != null && capture.IsOpened())
             {
-                string filePath = $"captured_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
-                image.Save(filePath);
-                MessageBox.Show($"Image saved: {filePath}");
+                Mat capturedFrame = new Mat();
+                capture.Read(capturedFrame);
+                if (!capturedFrame.Empty())
+                {
+                    Bitmap capturedImage = BitmapConverter.ToBitmap(capturedFrame);
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png|Bitmap Image|*.bmp";
+                        saveFileDialog.Title = "Save Captured Image";
+                        saveFileDialog.FileName = $"captured_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            capturedImage.Save(saveFileDialog.FileName);
+                            MessageBox.Show($"Image saved: {saveFileDialog.FileName}");
+                        }
+                    }
+                    capturedFrame.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to capture image!");
+                }
             }
             else
             {
-                MessageBox.Show("No image to save!");
+                MessageBox.Show("No active camera to capture an image!");
             }
         }
 
@@ -137,7 +157,7 @@ namespace WinFormsApp1
             StopCamera();
 
             // Now button2 can be pressed after button3 has been used
-            MessageBox.Show("Camera stopped. You can now press button2.");
+            MessageBox.Show("Camera stopped. You can now goes back to upload.");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
