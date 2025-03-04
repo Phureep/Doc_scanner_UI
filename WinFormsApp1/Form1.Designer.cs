@@ -33,12 +33,10 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            checkBox1 = new CheckBox();
-            checkBox2 = new CheckBox();
             ConfirmBtn = new Button();
             button3 = new Button();
             label1 = new Label();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            comboBox1 = new ComboBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,7 +44,7 @@
             // 
             groupBox1.Controls.Add(Uploadbtn);
             groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Location = new Point(263, 110);
+            groupBox1.Location = new Point(176, 167);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
@@ -81,7 +79,7 @@
             textBox1.BackColor = Color.Moccasin;
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(263, 9);
+            textBox1.Location = new Point(176, 68);
             textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(514, 64);
@@ -94,7 +92,7 @@
             // 
             textBox2.BackColor = Color.Moccasin;
             textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(263, 85);
+            textBox2.Location = new Point(181, 147);
             textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(374, 16);
@@ -102,31 +100,9 @@
             textBox2.Text = "Upload your document images to be scan and conver to a PDF.";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(672, 142);
-            checkBox1.Margin = new Padding(3, 2, 3, 2);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(119, 19);
-            checkBox1.TabIndex = 4;
-            checkBox1.Text = "Remove Shadows";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(672, 165);
-            checkBox2.Margin = new Padding(3, 2, 3, 2);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(131, 19);
-            checkBox2.TabIndex = 5;
-            checkBox2.Text = "Color Enchancment";
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
             // ConfirmBtn
             // 
-            ConfirmBtn.Location = new Point(555, 397);
+            ConfirmBtn.Location = new Point(468, 449);
             ConfirmBtn.Margin = new Padding(3, 2, 3, 2);
             ConfirmBtn.Name = "ConfirmBtn";
             ConfirmBtn.Size = new Size(82, 22);
@@ -137,7 +113,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(672, 254);
+            button3.Location = new Point(594, 287);
             button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
             button3.Size = new Size(105, 22);
@@ -149,32 +125,32 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(672, 237);
+            label1.Location = new Point(594, 270);
             label1.Name = "label1";
             label1.Size = new Size(170, 15);
             label1.TabIndex = 8;
             label1.Text = "Take picture of your document";
             // 
-            // flowLayoutPanel2
+            // comboBox1
             // 
-            flowLayoutPanel2.Location = new Point(906, 130);
-            flowLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(363, 232);
-            flowLayoutPanel2.TabIndex = 5;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Neither", "Convert to black and white", "Color Enhancement" });
+            comboBox1.Location = new Point(594, 235);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(170, 23);
+            comboBox1.TabIndex = 0;
+            comboBox1.SelectedIndexChanged += comboboxChange;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Moccasin;
-            ClientSize = new Size(1374, 618);
-            Controls.Add(flowLayoutPanel2);
+            ClientSize = new Size(915, 551);
+            Controls.Add(comboBox1);
             Controls.Add(label1);
             Controls.Add(button3);
             Controls.Add(ConfirmBtn);
-            Controls.Add(checkBox2);
-            Controls.Add(checkBox1);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(groupBox1);
@@ -192,12 +168,11 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private FlowLayoutPanel flowLayoutPanel1;
-        private CheckBox checkBox1;
-        private CheckBox checkBox2;
         private Button ConfirmBtn;
         private Button button3;
         private Label label1;
         private Button Uploadbtn;
         private FlowLayoutPanel flowLayoutPanel2;
+        private ComboBox comboBox1;
     }
 }

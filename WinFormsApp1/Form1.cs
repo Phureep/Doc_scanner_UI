@@ -1,3 +1,4 @@
+using OpenCvSharp;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace WinFormsApp1
         private string[] imagePaths;
         private List<Image> selectedImages = new List<Image>();
         private List<Image> processedImages = new List<Image>();
+        private int combobox = 0;
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -98,7 +100,8 @@ namespace WinFormsApp1
             // Set the working directory to the repository root so that os.getcwd() in Python returns the correct folder.
             string workingDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.StartupPath, @"..\..\..\"));
 
-            string arguments = $"\"{scriptPath}\" \"" + string.Join("\" \"", imagePaths) + "\"";
+            string arguments = $"\"{scriptPath}\" {combobox} \"" + string.Join("\" \"", imagePaths) + "\"";
+
 
             ProcessStartInfo start = new ProcessStartInfo
             {
@@ -135,7 +138,6 @@ namespace WinFormsApp1
                         // Split output for multiple images
                         string[] processedImagePaths = output.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
-                        flowLayoutPanel2.Controls.Clear(); // Clear previous processed images
 
                         foreach (string processedPath in processedImagePaths)
                         {
@@ -150,7 +152,7 @@ namespace WinFormsApp1
                                     Margin = new Padding(5) // Add spacing between images
                                 };
 
-                                flowLayoutPanel2.Controls.Add(pictureBox);
+                                
                                 Image img = Image.FromFile(processedPath);
                                 processedImages.Add(img);
                             }
@@ -169,5 +171,13 @@ namespace WinFormsApp1
             Form form2 = new Form2(processedImages);
             form2.ShowDialog();
         }
+
+        private void comboboxChange(object sender, EventArgs e)
+        {
+            // Update the variable with the selected index
+            combobox = comboBox1.SelectedIndex;
+        }
+
+        
     }
 }
